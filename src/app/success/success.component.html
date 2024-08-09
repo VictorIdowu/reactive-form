@@ -1,0 +1,8 @@
+<div class="ui success message" id="container">
+  <div class="header">Form Submitted Successfully!</div>
+  <div class="ui list">
+    <p *ngFor="let item of details">{{ item }}</p>
+  </div>
+
+  <button class="ui teal button" (click)="goBack()">Go Back</button>
+</div>

@@ -1,0 +1,106 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="ui form custom-dropshadow"
+  id="container"
+>
+  <div class="field">
+    <label>First Name</label>
+    <input type="text" formControlName="firstName" placeholder="First Name" />
+    <div
+      class="ui pointing red basic label"
+      *ngIf="
+        form.controls['firstName'].invalid && form.controls['firstName'].touched
+      "
+    >
+      First Name is required.
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Last Name</label>
+    <input type="text" formControlName="lastName" placeholder="Last Name" />
+    <div
+      class="ui pointing red basic label"
+      *ngIf="
+        form.controls['lastName'].invalid && form.controls['lastName'].touched
+      "
+    >
+      Last Name is required.
+    </div>
+  </div>
+
+  <div class="two fields">
+    <div class="field">
+      <label>Email</label>
+      <input type="email" formControlName="email" placeholder="Email" />
+      <div
+        class="ui pointing red basic label"
+        *ngIf="form.controls['email'].invalid && form.controls['email'].touched"
+      >
+        Valid Email is required.
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Password</label>
+      <input
+        type="password"
+        formControlName="password"
+        placeholder="Password"
+      />
+      <div
+        class="ui pointing red basic label"
+        *ngIf="
+          form.controls['password'].invalid && form.controls['password'].touched
+        "
+      >
+        Password must be at least 8 characters, with at least 1 uppercase and 1
+        special character.
+      </div>
+    </div>
+  </div>
+
+  <div class="two fields">
+    <div class="field">
+      <label>Phone Number</label>
+      <input type="text" formControlName="phone" placeholder="Phone Number" />
+    </div>
+
+    <div class="field">
+      <label>Occupation</label>
+      <sui-select
+        formControlName="occupation"
+        suiPlaceholder="Select Country"
+        [suiOptions]="occupations"
+      ></sui-select>
+    </div>
+  </div>
+
+  <div class="two fields">
+    <div class="field">
+      <label>Country</label>
+      <sui-select
+        formControlName="country"
+        suiPlaceholder="Select Country"
+        [suiOptions]="countries"
+      ></sui-select>
+    </div>
+
+    <div class="field">
+      <label>Successful</label>
+      <div class="ui radio checkbox">
+        <input type="radio" formControlName="successful" [value]="'true'" />
+        <label>True</label>
+      </div>
+      <div class="ui radio checkbox">
+        <input type="radio" formControlName="successful" [value]="'false'" />
+        <label>False</label>
+      </div>
+    </div>
+  </div>
+
+  <button class="ui teal button" type="submit" [disabled]="form.invalid">
+    Submit
+  </button>
+</form>
