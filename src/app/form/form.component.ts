@@ -51,7 +51,7 @@ export class FormComponent implements OnInit {
       phone: ['', Validators.required],
       country: ['Nigeria', Validators.required],
       occupation: ['Frontend Developer', Validators.required],
-      successful: ['', Validators.required],
+      successful: ['true', Validators.required],
     });
 
     this.getCountries().subscribe({
