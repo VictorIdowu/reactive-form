@@ -28,6 +28,10 @@ export class FormComponent implements OnInit {
     { text: 'Designer', value: 'Designer' },
     { text: 'Devops Engineer', value: 'Devops Engineer' },
   ];
+  seePassword = false;
+  toggleSeePass() {
+    this.seePassword = !this.seePassword;
+  }
 
   constructor(
     private fb: FormBuilder,

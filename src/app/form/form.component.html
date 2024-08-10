@@ -1,10 +1,12 @@
 <form
   [formGroup]="form"
   (ngSubmit)="onSubmit()"
-  class="ui form custom-dropshadow"
+  class="ui form custom-dropshadow {{
+    countries.length === 1 ? 'loading' : ''
+  }}"
   id="container"
 >
-  <div class="field">
+  <div class="required field">
     <label>First Name</label>
     <input type="text" formControlName="firstName" placeholder="First Name" />
     <div
@@ -17,7 +19,7 @@
     </div>
   </div>
 
-  <div class="field">
+  <div class="required field">
     <label>Last Name</label>
     <input type="text" formControlName="lastName" placeholder="Last Name" />
     <div
@@ -31,7 +33,7 @@
   </div>
 
   <div class="two fields">
-    <div class="field">
+    <div class="required field">
       <label>Email</label>
       <input type="email" formControlName="email" placeholder="Email" />
       <div
@@ -42,13 +44,22 @@
       </div>
     </div>
 
-    <div class="field">
+    <div class="required field">
       <label>Password</label>
-      <input
-        type="password"
-        formControlName="password"
-        placeholder="Password"
-      />
+      <div id="password">
+        <input
+          type="{{ seePassword ? 'text' : 'password' }}"
+          formControlName="password"
+          placeholder="Password"
+        />
+        <div class="see" (click)="toggleSeePass()">
+          @if (seePassword) {
+          <i class="eye icon"></i>
+          }@else {
+          <i class="eye slash icon"></i>
+          }
+        </div>
+      </div>
       <div
         class="ui pointing red basic label"
         *ngIf="
@@ -62,12 +73,12 @@
   </div>
 
   <div class="two fields">
-    <div class="field">
+    <div class="required field">
       <label>Phone Number</label>
       <input type="text" formControlName="phone" placeholder="Phone Number" />
     </div>
 
-    <div class="field">
+    <div class="required field">
       <label>Occupation</label>
       <sui-select
         formControlName="occupation"
@@ -78,7 +89,7 @@
   </div>
 
   <div class="two fields">
-    <div class="field">
+    <div class="required field">
       <label>Country</label>
       <sui-select
         formControlName="country"
