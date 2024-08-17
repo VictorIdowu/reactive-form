@@ -39,6 +39,10 @@ export class FormComponent implements OnInit {
     private success: SuccessService
   ) {}
 
+  fieldIsInvalid(field: string) {
+    return this.form.get(field)?.invalid && this.form.get(field)?.touched;
+  }
+
   ngOnInit() {
     this.form = this.fb.group({
       firstName: ['', Validators.required],
@@ -58,17 +62,11 @@ export class FormComponent implements OnInit {
       successful: ['true', Validators.required],
     });
 
-    this.getCountries().subscribe({
+    this.success.getCountries().subscribe({
       next: (data) => {
-        const sortedData = data.sort((a, b) => {
-          if (a.name.common < b.name.common) {
-            return -1;
-          }
-          if (a.name.common > b.name.common) {
-            return 1;
-          }
-          return 0;
-        });
+        const sortedData = data.sort((a: any, b: any) =>
+          a.name.common.localeCompare(b.name.common)
+        );
 
         this.countries = sortedData.map((country) => {
           return { text: country.name.common, value: country.name.common };
@@ -76,23 +74,6 @@ export class FormComponent implements OnInit {
       },
       error: (err) => console.error('Subscription error:', err),
     });
-  }
-
-  getCountries(): Observable<any[]> {
-    return fromFetch('https://restcountries.com/v3.1/all').pipe(
-      switchMap((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          console.error(`Error ${response.status}`);
-          return of([]);
-        }
-      }),
-      catchError((err) => {
-        console.error('Fetch error:', err);
-        return of([]);
-      })
-    );
   }
 
   onSubmit() {

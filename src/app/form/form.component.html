@@ -11,9 +11,7 @@
     <input type="text" formControlName="firstName" placeholder="First Name" />
     <div
       class="ui pointing red basic label"
-      *ngIf="
-        form.controls['firstName'].invalid && form.controls['firstName'].touched
-      "
+      *ngIf="fieldIsInvalid('firstName')"
     >
       First Name is required.
     </div>
@@ -22,12 +20,7 @@
   <div class="required field">
     <label>Last Name</label>
     <input type="text" formControlName="lastName" placeholder="Last Name" />
-    <div
-      class="ui pointing red basic label"
-      *ngIf="
-        form.controls['lastName'].invalid && form.controls['lastName'].touched
-      "
-    >
+    <div class="ui pointing red basic label" *ngIf="fieldIsInvalid('lastName')">
       Last Name is required.
     </div>
   </div>
@@ -36,10 +29,7 @@
     <div class="required field">
       <label>Email</label>
       <input type="email" formControlName="email" placeholder="Email" />
-      <div
-        class="ui pointing red basic label"
-        *ngIf="form.controls['email'].invalid && form.controls['email'].touched"
-      >
+      <div class="ui pointing red basic label" *ngIf="fieldIsInvalid('email')">
         Valid Email is required.
       </div>
     </div>
@@ -62,9 +52,7 @@
       </div>
       <div
         class="ui pointing red basic label"
-        *ngIf="
-          form.controls['password'].invalid && form.controls['password'].touched
-        "
+        *ngIf="fieldIsInvalid('password')"
       >
         Password must be at least 8 characters, with at least 1 uppercase and 1
         special character.
